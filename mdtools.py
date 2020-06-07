@@ -10,7 +10,7 @@ def generate_initial_velocities(atoms, m, T):
         transl_vec = np.full(3, maxwell(scale=a).stats('m')/2)
         distr = maxwell.rvs(scale=a, size=3)
         v.append((distr - transl_vec)*2)
-    return np.array(v)*1e10
+    return np.array(v)
 
 def pbc_ortho(coords_copy, box, point=np.array([0,0,0])):
     coords_copy -= point

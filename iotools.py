@@ -7,11 +7,11 @@ def readxyz(filename):
     atoms = xyzfile.iloc[:,0].to_numpy()
     coords = xyzfile.iloc[:,1:4].to_numpy()
     #return atoms, coords
-    return np.full(10, 'Ar'), (np.random.rand(10, 3) - np.array([.5, .5, .5]))*2*10
+    return np.full(3, 'Ar'), (np.random.rand(3, 3) - np.array([.5, .5, .5]))*2*10*1e-10
 
 def writexyz(atoms, coords):
     at_df = pd.DataFrame(atoms)
-    coord_df = pd.DataFrame(coords)
+    coord_df = pd.DataFrame(coords*1e10)
     merged = pd.concat([at_df, coord_df], axis=1)
     with open("traj.xyz", 'a+') as outfile:
         outfile.write(F"{len(atoms)}\n\n")

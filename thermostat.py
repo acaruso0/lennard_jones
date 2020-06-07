@@ -19,7 +19,7 @@ class Scaling(Thermostat):
     def __init__(self, Tf):
         super().__init__(Tf)
 
-    def rescale(self, v, T, Tf):
+    def rescale(self, v, T):
         self.c = np.sqrt(self.Tf/T)
         v *= self.c
         return v
@@ -31,8 +31,8 @@ class Berendsen(Thermostat):
         self.dt = dt
         self.tau = tau
 
-    def rescale(self, v, T, Tf):
-        self.c = np.sqrt(1 - (self.dt/self.tau)*(1-self.T_f/T))
-        v += self.c
+    def rescale(self, v, T):
+        self.c = np.sqrt(1 - (self.dt/self.tau)*(1-self.Tf/T))
+        v *= self.c
         return v
     
